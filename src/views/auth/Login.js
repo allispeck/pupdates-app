@@ -13,7 +13,8 @@ const Login = (props) => {
                          password: password
                      }).then(response => {
                          if (response.status === 204) {
-                             props.login();
+                             // todo: Find out what the F this does
+                             // props.login();
                          }
                      })
                  });
