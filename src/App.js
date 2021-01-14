@@ -8,7 +8,6 @@ const App = () => {
     return (
         <Router>
             <div>
-                <NavLink to='/dashboard'>Dashboard</NavLink>
                 <NavLink to='/login'>Login</NavLink>
                 <NavLink to='/register'>Register</NavLink>
             </div>
