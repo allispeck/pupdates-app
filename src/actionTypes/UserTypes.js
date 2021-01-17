@@ -1,0 +1,4 @@
+/* user login types */
+export const USER_LOGIN_PENDING = 'USER_LOGIN_PENDING';
+export const USER_LOGIN_SUCCESS= 'USER_LOGIN_SUCCESS';
+export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
