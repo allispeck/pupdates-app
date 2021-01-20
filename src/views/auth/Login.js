@@ -1,22 +1,27 @@
-import React, {useCallback} from 'react';
-import {useDispatch} from "react-redux";
+import React, {useCallback, useEffect} from 'react';
+import {connect, useDispatch} from "react-redux";
 import {useHistory} from 'react-router-dom';
 import {userLogin} from "../../actions/UserActions";
 
-const Login = (props) => {
+const Login = ({error, isLoggedIn}) => {
     const [email, setEmail]       = React.useState('');
     const dispatch                = useDispatch();
     const history                 = useHistory();
     const [password, setPassword] = React.useState('');
 
+    useEffect(() => {
+        if (isLoggedIn) {
+            history.push('/dashboard');
+        }
+    }, [history, isLoggedIn]);
+
     const handleSubmit = useCallback(
-       async (e) => {
+        async (e) => {
             e.preventDefault();
             await dispatch(userLogin({
                 email,
                 password
             }));
-            history.push('/dashboard')
         },
         [email, password],
     );
@@ -56,6 +61,8 @@ const Login = (props) => {
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                                required/>
+                        <div className="text-red-800 font-semibold text-sm">{error}</div>
+
 
                         <button type="submit"
                                 className="w-full py-3 mt-10 bg-gray-800 rounded-sm
@@ -85,4 +92,12 @@ const Login = (props) => {
     );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        error: state.userState.error,
+        isLoggedIn: state.userState.isLoggedIn
+    }
+};
+
+export default connect(mapStateToProps)(Login);
+// export default Login;
