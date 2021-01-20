@@ -1,8 +1,9 @@
 import * as userActionTypes from "../actionTypes/UserTypes";
 
 const initialState = {
-    user: {},
+    user: undefined,
     pending: false,
+    isLoggedIn: false,
     error: {}
 };
 

@@ -3,6 +3,7 @@ import apiAxios from "../Constants";
 
 export const userLoginPending = () => {
     return {
+        isLoggedIn: false,
         type: userActionTypes.USER_LOGIN_PENDING,
         pending: true,
         error: {}
@@ -11,6 +12,7 @@ export const userLoginPending = () => {
 export const userLoginSuccess = (user) => {
     return {
         user,
+        isLoggedIn: true,
         type: userActionTypes.USER_LOGIN_SUCCESS,
         pending: false,
         error: {}
@@ -19,6 +21,7 @@ export const userLoginSuccess = (user) => {
 };
 export const userLoginFailure = (error) => {
     return {
+        isLoggedIn: false,
         type: userActionTypes.USER_LOGIN_FAILURE,
         pending: false,
         error
@@ -39,7 +42,7 @@ export const userLogin = (payLoad) => {
             dispatch(userLoginSuccess(data));
         }
         catch (error) {
-            dispatch(userLoginFailure(error))
+            dispatch(userLoginFailure(error.response.data.errors))
         }
     }
 };
