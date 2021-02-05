@@ -16,14 +16,14 @@ const Login = ({error, isLoggedIn}) => {
     }, [history, isLoggedIn]);
 
     const handleSubmit = useCallback(
-        async (e) => {
+        (e) => {
             e.preventDefault();
-            await dispatch(userLogin({
+            dispatch(userLogin({
                 email,
                 password
             }));
         },
-        [email, password],
+        [email, password, dispatch],
     );
 
     return (
@@ -61,7 +61,7 @@ const Login = ({error, isLoggedIn}) => {
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                                required/>
-                        <div className="text-red-800 font-semibold text-sm">{error}</div>
+                        {/*<div className="text-red-800 font-semibold text-sm">{error}</div>*/}
 
 
                         <button type="submit"

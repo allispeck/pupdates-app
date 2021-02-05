@@ -16,6 +16,14 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 ...action
             };
+
+        case userActionTypes.USER_REGISTER_PENDING:
+        case userActionTypes.USER_REGISTER_SUCCESS:
+        case userActionTypes.USER_REGISTER_FAILURE:
+            return {
+                ...state,
+                ...action
+            };
         default:
             return state;
     }

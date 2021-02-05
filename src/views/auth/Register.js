@@ -1,6 +1,8 @@
 import React, {useCallback} from 'react';
 import Swal from 'sweetalert2';
 import apiAxios from "../../Constants";
+import {userRegister} from "../../actions/UserActions";
+import {useDispatch} from "react-redux";
 
 const Register = () => {
     const [email, setEmail]                     = React.useState('');
@@ -8,6 +10,7 @@ const Register = () => {
     const [password, setPassword]               = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
     const [name, setName]                       = React.useState('');
+    const dispatch                              = useDispatch();
 
     const updateName = useCallback(
         (e) => {
@@ -68,23 +71,18 @@ const Register = () => {
     const registerUser = useCallback(
         (e) => {
             e.preventDefault();
+
             if (!isValid()) {
                 return;
             }
-            apiAxios.get('/sanctum/csrf-cookie')
-                    .then(response => {
-                        apiAxios.post('api/register', {
-                            name: name,
-                            email: email,
-                            password: password
-                        }).then(response => {
-                            if (response.status === 204) {
+            dispatch(userRegister({
+                name,
+                email,
+                password
+            }));
 
-                            }
-                        })
-                    });
         },
-        [name, password, email, apiAxios, isValid],
+        [name, password, email, isValid],
     );
 
     return (
@@ -151,7 +149,7 @@ const Register = () => {
                         <label htmlFor="confirmPassword"
                                className="block mt-8 text-xs font-semibold text-gray-600 uppercase">Confirm
                             Password</label>
-                        <input value={password}
+                        <input value={confirmPassword}
                                onChange={updateConfirmPassword} id="confirmPassword" type="password"
                                name="confirmPassword" placeholder="confirm password"
                                autoComplete="confirm-password"
