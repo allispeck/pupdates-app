@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
 
-        <div className="flex border-b border-gray-800 py-2 px-2 flex-wrap justify-between">
+        <div className="flex border-b border-gray-800 py-2 px-2 flex-wrap justify-between bg-white">
             <div className="text-2xl font-semibold tracking-wide">
                 <FontAwesomeIcon icon={faDog} className="pr-1 text-4xl"/>
                 PupDates
