@@ -8,7 +8,5 @@ const apiAxios = axios.create({
     }
 });
 
-export const MOBILE_SCREEN_SIZE = 480;
-
 export default apiAxios;
 
