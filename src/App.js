@@ -5,6 +5,7 @@ import Dashboard from './views/Dashboard/Index';
 import Register from "./views/auth/Register";
 import CreatePet from "./views/Pets/CreatePet";
 import Navbar from "./layout/Navbar";
+import Footer from "./layout/Footer";
 
 
 const App = () => {
@@ -17,7 +18,9 @@ const App = () => {
                 <Route path='/register' component={Register}/>
                 <Route path='/pet/create' component={CreatePet}/>
             </Switch>
+            <Footer/>
         </Router>
+
     );
 };
 
