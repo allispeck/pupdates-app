@@ -1,5 +1,5 @@
-import * as userActionTypes from "../actionTypes/UserTypes";
-import apiAxios from "../Constants";
+import * as userActionTypes from "actionTypes/UserTypes";
+import apiAxios from "Constants";
 
 /* Login Actions */
 

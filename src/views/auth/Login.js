@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect} from 'react';
 import {connect, useDispatch} from "react-redux";
 import {useHistory} from 'react-router-dom';
-import {userLogin} from "../../actions/UserActions";
+import {userLogin} from "actions/UserActions";
 
-const Login = ({error, isLoggedIn}) => {
+export const Login = ({error, isLoggedIn}) => {
     const [email, setEmail]       = React.useState('');
     const dispatch                = useDispatch();
     const history                 = useHistory();
@@ -38,24 +38,24 @@ const Login = ({error, isLoggedIn}) => {
                     </h2>
 
                     <form className="mt-10" method="POST" onSubmit={handleSubmit}>
-                        <label for="email"
+                        <label form="email"
                                className="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
-                        <input value={email}
+                        <input data-testid="email-input" value={email}
                                onChange={e => setEmail(e.target.value)} id="email" type="email" name="email"
                                placeholder="e-mail address"
-                               autocomplete="email"
+                               autoComplete="email"
                                className="block w-full px-1 mt-2
                     text-gray-800 appearance-none
                     border-b-2 border-gray-100
                     focus:text-gray-500 focus:outline-none focus:border-gray-200"
                                required/>
 
-                        <label for="password"
+                        <label form="password"
                                className="block mt-8 text-xs font-semibold text-gray-600 uppercase">Password</label>
-                        <input value={password}
+                        <input data-testid="password-input" value={password}
                                onChange={e => setPassword(e.target.value)} id="password" type="password"
                                name="password" placeholder="password"
-                               autocomplete="current-password"
+                               autoComplete="current-password"
                                className="block w-full px-1 mt-2 mb-4
                     text-gray-800 appearance-none
                     border-b-2 border-gray-100
@@ -64,7 +64,7 @@ const Login = ({error, isLoggedIn}) => {
                         {/*<div className="text-red-800 font-semibold text-sm">{error}</div>*/}
 
 
-                        <button type="submit"
+                        <button data-testid="login-submit" type="submit"
                                 className="w-full py-3 mt-10 bg-gray-800 rounded-sm
                     font-medium text-white uppercase
                     focus:outline-none hover:bg-gray-700 hover:shadow-none">
@@ -100,4 +100,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Login);
-// export default Login;
