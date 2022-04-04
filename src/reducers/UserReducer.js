@@ -1,6 +1,6 @@
-import * as userActionTypes from "../actionTypes/UserTypes";
+import * as userActionTypes from "actionTypes/UserTypes";
 
-const initialState = {
+export const initialState = {
     user: undefined,
     pending: false,
     isLoggedIn: false,
