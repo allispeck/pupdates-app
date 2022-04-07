@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useHistory} from 'react-router-dom';
-import {petCreation} from "../../actions/PetActions";
+import {petCreation} from "actions/PetActions";
 import connect from "react-redux/es/connect/connect";
 
 

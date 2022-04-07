@@ -1,7 +1,7 @@
 /* Creation Actions */
 
-import * as petActionTypes from "../actionTypes/PetTypes";
-import apiAxios from "../Constants";
+import * as petActionTypes from "actionTypes/PetTypes";
+import apiAxios from "Constants";
 
 export const petCreationPending = () => {
     return {

@@ -1,5 +1,5 @@
-import * as userActionTypes from "../actionTypes/UserTypes";
-import apiAxios from "../Constants";
+import * as userActionTypes from "actionTypes/UserTypes";
+import apiAxios from "Constants";
 
 /* Login Actions */
 
@@ -32,7 +32,7 @@ export const userLoginFailure = (error) => {
 };
 
 export const userLogin = (payLoad) => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
             dispatch(userLoginPending());
             await apiAxios.get('/sanctum/csrf-cookie');

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiAxios = axios.create({
+export const apiAxios = axios.create({
     baseURL: 'http://localhost:8080/',
     withCredentials: true,
     headers: {
