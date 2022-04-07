@@ -32,7 +32,7 @@ export const userLoginFailure = (error) => {
 };
 
 export const userLogin = (payLoad) => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
             dispatch(userLoginPending());
             await apiAxios.get('/sanctum/csrf-cookie');
