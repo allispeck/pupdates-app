@@ -1,6 +1,7 @@
 import {apiAxios} from "Constants";
-import {userLogin} from "actions/UserActions";
+import {userLogin, userRegister} from "actions/UserActions";
 import * as userActionTypes from "actionTypes/UserTypes";
+import {callAction} from "setupTests";
 
 jest.mock("Constants");
 
@@ -13,7 +14,7 @@ const user = {
 const error = {
     response: {
         data: {
-            errors: "Failure"
+            errors: ["Failure"]
         }
     }
 };
@@ -23,9 +24,10 @@ const userLoginPayload = {
     password: 'password'
 };
 
-const callUserLogin = async (dispatch) => {
-    const callback = userLogin(userLoginPayload);
-    await callback(dispatch);
+const registerPayload = {
+    name: user.name,
+    email: user.email,
+    password: 'password'
 }
 
 describe("User Actions", () => {
@@ -37,7 +39,7 @@ describe("User Actions", () => {
 
         const mockDispatch = jest.fn();
 
-        await callUserLogin(mockDispatch);
+        await callAction(mockDispatch, userLogin, userLoginPayload);
 
         // that userLoginPending was called with data
         expect(mockDispatch).toHaveBeenCalledWith(
@@ -64,7 +66,7 @@ describe("User Actions", () => {
 
         const mockDispatch = jest.fn();
 
-        await callUserLogin(mockDispatch);
+        await callAction(mockDispatch, userLogin, userLoginPayload);
 
         // assert
         // that userLoginFailure was called with data
@@ -75,4 +77,45 @@ describe("User Actions", () => {
             error: error.response.data.errors
         });
     })
+
+    it("registers a user successfully", async () => {
+        apiAxios.post.mockResolvedValue({data: user});
+        const mockDispatch = jest.fn();
+
+        await callAction(mockDispatch, userRegister, registerPayload);
+
+        expect(mockDispatch).toHaveBeenCalledWith({
+            isLoggedIn: false,
+            type: userActionTypes.USER_REGISTER_PENDING,
+            pending: true,
+            error: {}
+        });
+        expect(mockDispatch).toHaveBeenLastCalledWith({
+            isLoggedIn: true,
+            user,
+            type: userActionTypes.USER_REGISTER_SUCCESS,
+            pending: false,
+            error: {}
+        });
+    });
+
+    it("catches error when registering user fails", async () => {
+        apiAxios.post.mockRejectedValue(error);
+        const mockDispatch = jest.fn();
+
+        await callAction(mockDispatch, userRegister, registerPayload);
+
+        expect(mockDispatch).toHaveBeenCalledWith({
+            isLoggedIn: false,
+            pending: true,
+            type: userActionTypes.USER_REGISTER_PENDING,
+            error: {}
+        });
+        expect(mockDispatch).toHaveBeenCalledWith({
+            isLoggedIn: false,
+            pending: false,
+            type: userActionTypes.USER_REGISTER_FAILURE,
+            error: error.response.data.errors,
+        });
+    });
 })

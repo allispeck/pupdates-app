@@ -60,21 +60,22 @@ export const userRegisterPending = () => {
     }
 };
 
-export const userRegisterSuccess= () => {
+export const userRegisterSuccess = (user) => {
     return {
-        isLoggedIn: false,
+        user,
+        isLoggedIn: true,
         type: userActionTypes.USER_REGISTER_SUCCESS,
-        pending: true,
+        pending: false,
         error: {}
     }
 };
 
-export const userRegisterFailure = () => {
+export const userRegisterFailure = (error) => {
     return {
         isLoggedIn: false,
         type: userActionTypes.USER_REGISTER_FAILURE,
-        pending: true,
-        error: {}
+        pending: false,
+        error
     }
 };
 

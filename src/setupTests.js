@@ -10,3 +10,8 @@ jest.mock("react-redux", () => ({
     ...jest.requireActual("react-redux"),
     useDispatch: () => mockReduxDispatch,
 }));
+
+export const callAction = async (mockedDispatch, action, payload) => {
+    const callback = action(payload);
+    await callback(mockedDispatch);
+}
