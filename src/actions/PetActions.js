@@ -37,7 +37,6 @@ export const petCreation = (payload) => {
                 date_of_birth: payload.dateOfBirth,
                 breed: payload.breed,
             });
-            console.log(data);
             dispatch(petCreationSuccess(data.data))
         } catch (error) {
             dispatch(petCreationFailure(error.response.data.errors))
